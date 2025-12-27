@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+groq              # নতুন: Groq SDK
+pydantic
+python-dotenv
+sqlalchemy
+psycopg2-binary   # PostgreSQL ড্রাইভার
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart

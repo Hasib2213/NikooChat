@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.pyvenv
+.idea/
+.vscode/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Database
+*.db
+*.sqlite3
+chat.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+*.logs
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Testing & coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.pytest_cache/
+.pytest_cache/
+coverage/
+
+# Miscellaneous
+*.swp
+*.bak
+*.tmp
+*.tmp.*
+*.bak.*
+*.temp
+*.temp.*
+.DS_Store
+
+# PostgreSQL local backups (যদি থাকে)
+*.backup
+*.sql.gz
+
+# Groq / API keys (যদি কোনো ফাইলে সেভ করা থাকে)
+*.key
