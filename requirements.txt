@@ -8,3 +8,5 @@ psycopg2-binary   # PostgreSQL ড্রাইভার
 python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
+streamlit
+requests
