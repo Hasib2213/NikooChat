@@ -19,6 +19,7 @@ class MessageResponse(BaseModel):
 class ConversationResponse(BaseModel):
     id: int
     title: str
+    message_count: int = 0
 
 class ConversationList(BaseModel):
     conversations: List[ConversationResponse]

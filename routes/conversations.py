@@ -20,7 +20,15 @@ def create_conversation(session_id: str = Depends(get_session_id), db: Session =
 @router.get("/", response_model=ConversationList)
 def list_conversations(session_id: str = Depends(get_session_id), db: Session = Depends(get_db)):
     convs = db.query(Conversation).filter(Conversation.user_id == 1).all()
-    return {"conversations": [{"id": c.id, "title": c.title} for c in convs]}
+    conversations_with_count = []
+    for c in convs:
+        msg_count = db.query(Message).filter(Message.conversation_id == c.id).count()
+        conversations_with_count.append({
+            "id": c.id, 
+            "title": c.title,
+            "message_count": msg_count
+        })
+    return {"conversations": conversations_with_count}
 
 @router.delete("/{conv_id}")
 def delete_conversation(conv_id: int, session_id: str = Depends(get_session_id), db: Session = Depends(get_db)):

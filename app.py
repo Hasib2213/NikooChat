@@ -166,16 +166,19 @@ with st.sidebar:
     
     if st.session_state.conversations_list:
         for conv in st.session_state.conversations_list:
-            col1, col2 = st.columns([4, 1])
+            col1, col2, col3 = st.columns([4, 0.5, 1])
             with col1:
+                msg_count = conv.get("message_count", 0)
                 if st.button(
-                    f"💬 {conv['title'][:30]}...",
+                    f"💬 {conv['title'][:25]}... ({msg_count})",
                     key=f"conv_{conv['id']}",
                     use_container_width=True
                 ):
                     st.session_state.current_conversation = conv["id"]
                     st.rerun()
             with col2:
+                st.caption(f"📊 {msg_count}")
+            with col3:
                 if st.button(
                     "🗑️",
                     key=f"del_{conv['id']}",
