@@ -158,9 +158,7 @@ Rules:
    • Protect your account with strong auth and session checks.
    • Always use in-app payments (escrow protected).
    • Report suspicious behavior immediately.
-   For follow-up, contact support at nikoo@app.com with your Ticket ID.
-
-   
+   For follow-up, contact support at nikoo@app.com with your Ticket ID.  
 14. When users ask about Guardian, parental control, child safety, monitoring, schedules, app blocking, or child account:
    👪 Guardian (Parental Control) Guide:
    - To set up Guardian:
@@ -186,12 +184,6 @@ Rules:
 
    Guardian helps parents monitor and protect child's digital safety.
    For issues: Contact nikoo@app.com.   
-
-   
-   
-   
-   
-   
 15.When users ask about errors, empty feed, offline, permissions, update required, device not supported, or feature not available:
    ⚙️ Common Issues & Fixes:
    - Feed empty? → "Your feed is empty. Tap 'Discover Content' to explore and follow creators/topics."
