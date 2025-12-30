@@ -192,7 +192,7 @@ with st.sidebar:
         st.info("No conversations yet. Start a new one!")
 
 # Main chat area
-st.title("💬 Nikoo AI Chatbot")
+st.title("💬AI Chatbot")
 
 if st.session_state.current_conversation is None:
     st.info("👈 Select a conversation from the sidebar or create a new one to start chatting!")
