@@ -1,19 +1,24 @@
 # create_tables.py
 from database import Base, engine, SessionLocal, User
+from utils.security import get_password_hash
 
 Base.metadata.create_all(bind=engine)
 print("✓ Tables created successfully!")
 
-# Create a default anonymous user for the public chatbot
+# Create default test user for development
 db = SessionLocal()
 try:
     existing_user = db.query(User).filter(User.id == 1).first()
     if not existing_user:
-        anonymous_user = User(id=1, username="anonymous", hashed_password="")
-        db.add(anonymous_user)
+        test_user = User(
+            id=1, 
+            username="test_user", 
+            hashed_password=get_password_hash("dev_password")
+        )
+        db.add(test_user)
         db.commit()
-        print("✓ Default anonymous user created (id=1)")
+        print("✓ Default test user created (id=1, username=test_user)")
     else:
-        print("✓ Anonymous user already exists")
+        print(f"✓ User already exists: {existing_user.username}")
 finally:
     db.close()

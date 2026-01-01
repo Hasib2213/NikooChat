@@ -199,22 +199,71 @@ Rules:
 """
 
 def get_ai_response(messages_history: list) -> str:
-    try:
-        # Groq msg format
+    """
+    Get AI response from Groq API with proper error handling.
+    
+    Args:
+        messages_history: List of Message objects from database
+    
+    Returns:
+        str: AI response text
+    
+    Raises:
+        Exception: If API call fails after retry
+    """
+    import logging
+    from tenacity import retry, stop_after_attempt, wait_exponential
+    
+    logger = logging.getLogger(__name__)
+    
+    @retry(
+        stop=stop_after_attempt(2),
+        wait=wait_exponential(multiplier=1, min=1, max=5)
+    )
+    def _call_groq():
+        """Call Groq API with retry logic"""
         messages = [{"role": "system", "content": SYSTEM_PROMPT}]
         
+        # Build message history
         for msg in messages_history:
             role = "user" if msg.sender == "user" else "assistant"
             messages.append({"role": role, "content": msg.content})
         
-        chat_completion = client.chat.completions.create(
-            messages=messages,
-            model="llama-3.3-70b-versatile",   # Currently available model
-            temperature=0.5,
-            max_tokens=500
-        )
+        # Validate message count
+        if not messages_history:
+            logger.warning("Empty message history provided")
         
-        return chat_completion.choices[0].message.content.strip()
+        # Call Groq API
+        try:
+            chat_completion = client.chat.completions.create(
+                messages=messages,
+                model="llama-3.3-70b-versatile",
+                temperature=0.5,
+                max_tokens=500,
+                top_p=0.95
+            )
+            
+            response = chat_completion.choices[0].message.content.strip()
+            if not response:
+                logger.warning("Groq returned empty response")
+                return "I'm having trouble responding right now. Please try again."
+            
+            return response
+        
+        except Exception as e:
+            logger.error(f"Groq API error: {str(e)}", exc_info=True)
+            raise
+    
+    try:
+        return _call_groq()
+    
     except Exception as e:
-        # Fallback response if API fails
-        return f"Sorry, I encountered an error: {str(e)}"
+        logger.error(f"Failed to get AI response after retries: {str(e)}")
+        # Return helpful fallback messages based on error type
+        if "rate_limit" in str(e).lower():
+            return "I'm busy helping other users. Please wait a moment and try again."
+        elif "api_key" in str(e).lower():
+            logger.critical("API key configuration error")
+            return "Service configuration error. Please contact support at nikoo@app.com"
+        else:
+            return "I'm temporarily unavailable. Please try again in a moment."
