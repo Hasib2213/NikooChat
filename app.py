@@ -59,7 +59,7 @@ def fetch_conversations():
     """Fetch all conversations"""
     try:
         response = requests.get(
-            f"{API_BASE_URL}/conversations/",
+            f"{API_BASE_URL}/api/conversations/",
             headers=get_headers()
         )
         if response.status_code == 200:
@@ -72,7 +72,7 @@ def create_conversation():
     """Create a new conversation"""
     try:
         response = requests.post(
-            f"{API_BASE_URL}/conversations/",
+            f"{API_BASE_URL}/api/conversations/",
             headers=get_headers()
         )
         if response.status_code == 200:
@@ -85,7 +85,7 @@ def delete_conversation(conv_id):
     """Delete a conversation"""
     try:
         response = requests.delete(
-            f"{API_BASE_URL}/conversations/{conv_id}",
+            f"{API_BASE_URL}/api/conversations/{conv_id}",
             headers=get_headers()
         )
         if response.status_code == 200:
@@ -98,7 +98,7 @@ def fetch_messages(conv_id):
     """Fetch messages for a conversation"""
     try:
         response = requests.get(
-            f"{API_BASE_URL}/conversations/{conv_id}/messages",
+            f"{API_BASE_URL}/api/conversations/{conv_id}/messages",
             headers=get_headers()
         )
         if response.status_code == 200:
@@ -111,7 +111,7 @@ def send_message(conv_id, message_content):
     """Send a message and get AI response"""
     try:
         response = requests.post(
-            f"{API_BASE_URL}/conversations/{conv_id}/messages",
+            f"{API_BASE_URL}/api/conversations/{conv_id}/messages",
             json={"content": message_content},
             headers=get_headers()
         )

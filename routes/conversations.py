@@ -6,7 +6,7 @@ from dependencies import get_current_user, get_current_user_id
 import logging
 
 logger = logging.getLogger(__name__)
-router = APIRouter(prefix="/conversations", tags=["conversations"])
+router = APIRouter(prefix="/api/conversations", tags=["conversations"])
 
 @router.post("/", response_model=int)
 def create_conversation(
