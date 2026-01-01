@@ -7,7 +7,7 @@ from services.ai_services import get_ai_response
 import logging
 
 logger = logging.getLogger(__name__)
-router = APIRouter(prefix="/conversations", tags=["messages"])
+router = APIRouter(prefix="/api/conversations", tags=["messages"])
 
 @router.post("/{conv_id}/messages", response_model=MessageResponse)
 def send_message(
